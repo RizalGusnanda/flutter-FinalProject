@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:flutterapp/Services/globals.dart';
+import 'package:flutterapp/components/category.dart';
 import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -67,6 +68,27 @@ class AuthServices {
         "name": name,
       },
     );
+    return response;
+  }
+
+  Future<http.Response> editCategory(Category category, String name) async {
+    final url = Uri.parse(baseURL + 'category/${category.id}');
+    SharedPreferences pref = await SharedPreferences.getInstance();
+    const key = 'token';
+    final value = pref.get(key);
+    final token = value;
+    final body = {
+      'name': name,
+    };
+    final headers = {
+      'Accept': 'application/json',
+      'Authorization': 'Bearer ' + '$token',
+    };
+
+    final response = await http.put(url, body: body, headers: headers);
+
+    print(response.body);
+    print(response.statusCode);
     return response;
   }
 

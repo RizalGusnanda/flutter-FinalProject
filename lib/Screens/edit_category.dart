@@ -1,14 +1,36 @@
 import 'package:flutter/material.dart';
+import 'package:flutterapp/Screens/home_screen.dart';
+import 'package:flutterapp/Services/auth_services.dart';
+import 'package:flutterapp/Services/category_services.dart';
+import 'package:flutterapp/components/category.dart';
 
 class edit extends StatefulWidget {
-  const edit({Key? key}) : super(key: key);
+  const edit({Key? key, required this.category}) : super(key: key);
 
+  final Category category;
   @override
   State<edit> createState() => _editState();
 }
 
 class _editState extends State<edit> {
-  TextEditingController etCategory = TextEditingController();
+  TextEditingController? etCategory;
+
+  doEditCategory() async {
+    final name = etCategory?.text;
+    final response = await AuthServices().editCategory(widget.category, name!);
+    print(response.body);
+    Navigator.push(
+      context,
+      MaterialPageRoute(builder: (context) => HomeScreen()),
+    );
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    etCategory = TextEditingController(text: widget.category.name);
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -71,10 +93,7 @@ class _editState extends State<edit> {
                     ),
                   ),
                   onPressed: () {
-                    Navigator.pushNamed(
-                      context,
-                      '/home',
-                    );
+                    doEditCategory();
                   },
                   child: const Text(
                     "Edit Category",

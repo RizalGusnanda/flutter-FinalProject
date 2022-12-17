@@ -75,4 +75,6 @@ class CategoryService {
     final response = await delete(url, headers: headers);
     return response;
   }
+
+  editCategory(Category category, String s) {}
 }

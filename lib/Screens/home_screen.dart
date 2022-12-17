@@ -224,8 +224,8 @@ class _HomeScreen extends State<HomeScreen> {
                                     Navigator.push(
                                         context,
                                         MaterialPageRoute(
-                                          builder: (BuildContext context) =>
-                                              const edit(),
+                                          builder: (context) => edit(
+                                              category: listCategory[index]),
                                         ));
                                   } else {
                                     final response = await CategoryService()
