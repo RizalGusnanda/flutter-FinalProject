@@ -51,6 +51,25 @@ class AuthServices {
     return response;
   }
 
+  Future<http.Response> requestAddCategory(String name) async {
+    var url = Uri.parse(baseURL + 'category');
+    final prefs = await SharedPreferences.getInstance();
+    final token = prefs.getString('token');
+
+    final response = await http.post(
+      url,
+      headers: {
+        "Accept": "application/json",
+        "Access-Control_Allow_Origin": "*",
+        "Authorization": "Bearer $token",
+      },
+      body: {
+        "name": name,
+      },
+    );
+    return response;
+  }
+
   static Future<http.Response> logout(String token) async {
     var url = Uri.parse(baseURL + 'auth/logout');
     final body = {};

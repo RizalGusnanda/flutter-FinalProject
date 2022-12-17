@@ -38,7 +38,10 @@ class _HomeScreen extends State<HomeScreen> {
     final name = addCategoryTxt.text;
     final response = await CategoryService().addCategory(name);
     print(response.body);
-    Navigator.pushNamed(context, "/");
+    // Navigator.pushNamed(context, "/");
+    listCategory.clear();
+    getKategori();
+    addCategoryTxt.clear();
   }
 
   getUser() async {
@@ -119,38 +122,8 @@ class _HomeScreen extends State<HomeScreen> {
               flex: 1,
               child: Container(
                 margin: const EdgeInsets.fromLTRB(16, 0, 0, 0),
-                child: Row(
-                  children: [
-                    Padding(
-                      padding: const EdgeInsets.symmetric(
-                        vertical: 48.0,
-                      ),
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.end,
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            'Hello, $name',
-                            style: const TextStyle(
-                              color: Colors.black,
-                              fontWeight: FontWeight.bold,
-                              fontSize: 24,
-                            ),
-                          ),
-                          const SizedBox(
-                            height: 4,
-                          ),
-                          const Text(
-                            'Mari Menjelajah',
-                            style: TextStyle(
-                              color: Color.fromARGB(196, 0, 0, 0),
-                              fontSize: 16,
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                  ],
+                child: const SizedBox(
+                  height: 4,
                 ),
               ),
             ),
@@ -181,6 +154,7 @@ class _HomeScreen extends State<HomeScreen> {
                     Container(
                       margin: const EdgeInsets.all(16),
                       child: TextFormField(
+                        controller: addCategoryTxt,
                         decoration: InputDecoration(
                           hintText: "Input Your Categories Name",
                           labelText: "Add Categories",
