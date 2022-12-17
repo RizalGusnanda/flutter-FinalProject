@@ -46,7 +46,7 @@ class AuthServices {
     print(response.body);
     var datas = json.decode(response.body);
 
-    // save('token', datas['token']);
+    save('token', datas['token']);
     // save('name', datas['name']);
     return response;
   }
