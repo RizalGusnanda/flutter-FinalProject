@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
+import 'package:flutterapp/Screens/edit_category.dart';
 import 'package:flutterapp/Screens/login_screen.dart';
 import 'package:flutterapp/Services/category_services.dart';
 import 'package:flutterapp/components/category.dart';
@@ -188,7 +189,7 @@ class _HomeScreen extends State<HomeScreen> {
                               return Dismissible(
                                 key: UniqueKey(),
                                 background: Container(
-                                  color: Colors.yellowAccent,
+                                  color: Color.fromARGB(255, 51, 179, 55),
                                   child: Padding(
                                     padding: const EdgeInsets.all(15),
                                     child: Row(
@@ -216,6 +217,17 @@ class _HomeScreen extends State<HomeScreen> {
                                     ),
                                   ),
                                 ),
+                                onDismissed: (DismissDirection direction) {
+                                  if (direction ==
+                                      DismissDirection.startToEnd) {
+                                    Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                          builder: (BuildContext context) =>
+                                              const edit(),
+                                        ));
+                                  }
+                                },
                                 child: Container(
                                   margin:
                                       const EdgeInsets.fromLTRB(10, 5, 10, 5),
