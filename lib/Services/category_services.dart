@@ -60,4 +60,19 @@ class CategoryService {
     final response = await post(url, body: body, headers: headers);
     return response;
   }
+
+  Future<Response> deleteCategory(Category category) async {
+    final url = Uri.parse(baseUrl + 'category/${category.id}');
+    SharedPreferences pref = await SharedPreferences.getInstance();
+    const key = 'token';
+    final value = pref.get(key);
+    final token = value;
+    final headers = {
+      'Accept': 'application/json',
+      'Authorization': 'Bearer ' + '$token',
+    };
+
+    final response = await delete(url, headers: headers);
+    return response;
+  }
 }

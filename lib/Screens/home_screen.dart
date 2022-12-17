@@ -217,7 +217,8 @@ class _HomeScreen extends State<HomeScreen> {
                                     ),
                                   ),
                                 ),
-                                onDismissed: (DismissDirection direction) {
+                                onDismissed:
+                                    (DismissDirection direction) async {
                                   if (direction ==
                                       DismissDirection.startToEnd) {
                                     Navigator.push(
@@ -226,6 +227,10 @@ class _HomeScreen extends State<HomeScreen> {
                                           builder: (BuildContext context) =>
                                               const edit(),
                                         ));
+                                  } else {
+                                    final response = await CategoryService()
+                                        .deleteCategory(listCategory[index]);
+                                    print(response.body);
                                   }
                                 },
                                 child: Container(
